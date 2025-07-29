@@ -87,7 +87,7 @@ Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" mu
 If "Actions Taken on Academic Concerns" = "Created or revised Academic Improvement Plan":
 - Then "Is student on an Improvement Plan?" = "Yes"
 - And "Improvement Plan Progress" ≠ "Not applicable to student"  
-Vice versa: If student is on an Improvement Plan or progress is listed, then "Actions Taken" must reflect that.
+Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Created or revised Academic Improvement Plan"
 
 🔹 Rule 3: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable",
