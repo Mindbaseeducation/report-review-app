@@ -2,3 +2,4 @@ streamlit
 pandas
 openai==0.28
 openpyxl
+xlsxwriter
