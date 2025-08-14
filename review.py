@@ -152,7 +152,7 @@ Remark: [Rule X violated: explanation
         prompt = generate_prompt(row)
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-5",
+                model="gpt-5-mini",
                 messages=[
                     {"role": "system", "content": "You are a logical and insightful academic reviewer."},
                     {"role": "user", "content": prompt}
@@ -192,5 +192,6 @@ Remark: [Rule X violated: explanation
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
