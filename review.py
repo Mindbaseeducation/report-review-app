@@ -121,12 +121,12 @@ If "Current Academic Status" = "None",
 Vice versa: If Khotwa Status = one of those, Current Academic Status should be "None"
 
 🔹 Rule 8: Grade Release Date Check  
-If "Khotwa Program Status" contains "Active", then expected grade release date (if present) must not include "1900"  
-Vice versa: If grade date = "1900", then Khotwa status must not say "Active"
+If "Khotwa Program Status" contains "Active", then expected "Next expected grade release date" (if present) must not be "1900-01-01 00:00:00"  
+Vice versa: If "Next expected grade release date" = "1900-01-01 00:00:00", then "Khotwa Program Status" must not contain "Active"
 
 🔹 Rule 9: Additional Notes-Based Validations  
-If “Academic Concerns” = “Behavioral issues impacting academics”, the Notes must **justify** it  
-If “Actions taken on student well-being concerns” = “Informed ADEK Advisor of Critical concerns”, the Notes must **justify** it
+If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it  
+If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of Critical concerns", the Notes must **justify** it
 
 ---
 
@@ -140,33 +140,29 @@ Remark: [Rule X violated: explanation
 
 """
 
-    # Regex-safe field extractor
+
     def extract_field(lines, label):
         for line in lines:
-            match = re.match(rf".*{label}\s*:\s*(.*)", line.strip(), re.IGNORECASE)
+            match = re.match(rf"^{label}\s*:\s*(.*)", line.strip(), re.IGNORECASE)
             if match:
                 return match.group(1).strip()
-        return "Error"
+        return ""
 
     def review_student(row):
         prompt = generate_prompt(row)
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-4-turbo",
+                model="gpt-5-mini",
                 messages=[
-                    {"role": "system", "content": "You are a logical and insightful academic reviewer."},
+                    {"role": "system", "content": "You are a strict academic reviewer applying all rules equally."},
                     {"role": "user", "content": prompt}
-                ],
-            temperature=0
+                ]
             )
             content = response['choices'][0]['message']['content']
             lines = content.strip().split("\n")
-
             status = extract_field(lines, "Status")
             remark = extract_field(lines, "Remark") if status.lower() != "approved" else ""
-
             return status, remark
-
         except Exception as e:
             return "Error", str(e)
 
@@ -186,14 +182,9 @@ Remark: [Rule X violated: explanation
             output.seek(0)
 
             st.success("✅ Review Complete!")
-
             st.download_button(
                 label="📥 Download Reviewed File",
                 data=output,
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
-
-
-
-
