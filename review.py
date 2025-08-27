@@ -92,6 +92,7 @@ Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is liste
 🔹 Rule 3: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable",
   → Institution student transferred to **should** be "N/A" or "Unknown"
+  → Stage of transfer **should** be "Not Applicable"
 - If "Stage of Transfer" = "Not Applicable" or "Transfer rejected",
   → Institution student transferred to **should** be "N/A" or "Unknown"
   → else Institution student transferred to **can** be any value except "N/A"
@@ -134,12 +135,10 @@ If multiple rules are violated, list all.
 Return the result **strictly** in the following format — do not add any explanation or extra commentary:
 
 Status: [Approved / Need Clarification]  
-Remark: [Rule X violated: explanation
-         Rule Y violated: explanation]
-(Include all violated rules)]
+Remark: List **all violated rules** together in the format:
+        Rule A violated: explanation; Rule B violated: explanation; Rule C violated: explanation; Rule D violated: explanation
 
 """
-
 
     def extract_field(lines, label):
         for line in lines:
@@ -188,3 +187,4 @@ Remark: [Rule X violated: explanation
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
