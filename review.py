@@ -117,9 +117,9 @@ Vice versa: If those fields are filled, participation cannot be "No"
 Vice versa: Any status change between English and Degree programs must be justified. If not, mark "Need Clarification"
 
 🔹 Rule 7: Current Academic Status ↔ Khotwa Status  
-If "Current Academic Status" = "None",  
+If "Current Academic Status" = "None" or "N/A",  
 → Khotwa Status must be "Termination - In Progress" or "On Hold - Not Enrolled"  
-Vice versa: If Khotwa Status = one of those, Current Academic Status should be "None"
+Vice versa: If Khotwa Status = one of those, Current Academic Status should be "None" or "N/A"
 
 🔹 Rule 8: Grade Release Date Check  
 If "Khotwa Program Status" contains "Active", then expected "Next expected grade release date" (if present) must not be "1900-01-01 00:00:00"  
@@ -187,4 +187,5 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
