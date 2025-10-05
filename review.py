@@ -26,22 +26,16 @@ Below is a student's monthly report:
 📘 Study Status:
 - Khotwa Program Status: {row['Khotwa Program Status']}
 - Current Academic Status: {row['Current Academic Status']}
-- Next Month Academic Status: {row['Next Month Academic Status']}
 
 📘 Academic:
 - Academic Concerns: {row['Academic Concerns']}
 - Actions Taken on Academic Concerns: {row['Actions Taken on Academic Concerns']}
-- Proactive Actions Taken: {row['Proactive Actions Taken']}
 - Is student on an Improvement Plan?: {row['Is student on an Improvement Plan?']}
 - Improvememt Plan Progress: {row['Improvememt Plan Progress']}
 
 📞 Mentor Contact with ADEK Advisor:
 - Reason for contact with ADEK Advisor: {row['Reason for contact with ADEK Advisor']}
 - Date of meeting with ADEK Advisor: {row['Date of meeting with ADEK Advisor']}
-
-🏫 Mentor Contact with Institution:
-- Mentor's Contact Point with Institutions: {row["Mentor's Contact Point with Institutions"]}
-- Date of meeting with institution: {row['Date of meeting with institution']}
 
 🔁 Transfer:
 - Type of Transfer: {row['Type of Transfer']}
@@ -56,7 +50,6 @@ Below is a student's monthly report:
 🎯 Extracurricular:
 - Student participation in any extracurricular activity?: {row['Student participation in any extracurricular activity?']}
 - Details of extracurricular activities: {row['Details of extracurricular activities']}
-- Activities' impact on academics: {row["Activities' impact on academics"]}
 
 📝 Notes on student:
 {row['Student notes']}
@@ -67,7 +60,7 @@ Below is a student's monthly report:
 
 You must interpret the “Notes on student” to verify the logical correctness of:
 - "Academic Concerns" and "Actions Taken on Academic Concerns"
-- Transitions in "Academic Status" (Current ↔ Next)
+- "Khotwa Program Status"
 - Well-being and transfer actions
 - All other key fields
 
@@ -84,10 +77,10 @@ If "Academic Concerns" = "No concerns", then "Actions Taken on Academic Concerns
 Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
 
 🔹 Rule 2: Academic Improvement Plan Required  
-If "Actions Taken on Academic Concerns" = "Created or revised Academic Improvement Plan":
+If "Actions Taken on Academic Concerns" = "Academic Improvement Plan initiated":
 - Then "Is student on an Improvement Plan?" = "Yes"
 - And "Improvement Plan Progress" ≠ "Not applicable to student"  
-Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Created or revised Academic Improvement Plan"
+Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Academic Improvement Plan initiated"
 
 🔹 Rule 3: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable",
@@ -104,30 +97,21 @@ Vice versa: If actions = "None", concerns must also be "None"
 
 🔹 Rule 5: Extracurricular Activity  
 If participation ≠ "No":
-- Then both "Details of extracurricular activities" and "Activities' impact on academics" must be filled  
-Vice versa: If those fields are filled, participation cannot be "No"
+- Then "Details of extracurricular activities" must not be "N/A" or "Not Applicable"  
+Vice versa: If "Details of extracurricular activities" is filled with values neither "N/A" nor "Not Applicable", participation cannot be "No"
 
-🔹 Rule 6: Academic Status Progression (CRITICAL)  
-- If Current Academic Status = "Bachelor Degree Courses Only" or "Associate Degree Courses Only",  
-  → Next Month Academic Status **cannot** be "English Program Courses Only"
-- If Current Academic Status = "English Program Courses Only",  
-  → Next Month must also be "English Program Courses Only"
-- If either value = "Associate & Bachelor Degree Courses",  
-  → Must be justified in Notes on student  
-Vice versa: Any status change between English and Degree programs must be justified. If not, mark "Need Clarification"
+🔹 Rule 6: Khotwa Status  
+If "Khotwa Program Status" = "Withdrawal / Termination Requested - Pending ADEK approval" or "Withdrawal / Termination approved by ADEK",  
+→ Then Notes must **justify** it  
+Vice versa: If Notes mention student's withdrawal, then "Khotwa Program Status" should be "Withdrawal / Termination Requested - Pending ADEK approval" or "Withdrawal / Termination approved by ADEK"
 
-🔹 Rule 7: Current Academic Status ↔ Khotwa Status  
-If "Current Academic Status" = "None" or "N/A",  
-→ Khotwa Status must be "Termination - In Progress" or "On Hold - Not Enrolled"  
-Vice versa: If Khotwa Status = one of those, Current Academic Status should be "None" or "N/A"
+🔹 Rule 7: Grade Release Date Check  
+If "Khotwa Program Status" contains a word "Active", then Year of "Next expected grade release date" (if not "N/A") should not be "1900"  
+Vice versa: If Year of "Next expected grade release date" is "1900", then "Khotwa Program Status" must contain a word "Active"
 
-🔹 Rule 8: Grade Release Date Check  
-If "Khotwa Program Status" contains "Active", then expected "Next expected grade release date" (if present) must not be "1900-01-01 00:00:00"  
-Vice versa: If "Next expected grade release date" = "1900-01-01 00:00:00", then "Khotwa Program Status" must not contain "Active"
-
-🔹 Rule 9: Additional Notes-Based Validations  
+🔹 Rule 8: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it  
-If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of Critical concerns", the Notes must **justify** it
+If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of critical concerns", the Notes must **justify** it
 
 ---
 
@@ -187,5 +171,3 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
-
-
