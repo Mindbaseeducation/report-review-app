@@ -85,11 +85,11 @@ Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is liste
 🔹 Rule 3: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable",
   → Institution student transferred to **should** be "N/A" or "Unknown"
-  → Stage of transfer **should** be "Not Applicable"
+  → Stage of transfer **should** be "Not Applicable" or "N/A"
 - If "Stage of Transfer" = "Not Applicable" or "Transfer rejected",
   → Institution student transferred to **should** be "N/A" or "Unknown"
   → else Institution student transferred to **can** be any value except "N/A"
-Vice versa: If institution is N/A, stage must be "Not Applicable"
+Vice versa: If institution is "N/A" or "Not Applicable", stage must be "Not Applicable" or "N/A"
 
 🔹 Rule 4: Well-being Consistency  
 If "Student well-being concerns" = "None", then "Actions taken on student well-being concerns" = "None"  
@@ -171,3 +171,4 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
