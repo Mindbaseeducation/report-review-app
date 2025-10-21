@@ -83,10 +83,10 @@ If "Actions Taken on Academic Concerns" = "Academic Improvement Plan initiated":
 Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Academic Improvement Plan initiated"
 
 🔹 Rule 3: Transfer Logic  
-- If "Type of Transfer" = "Not Applicable",
+- If "Type of Transfer" = "Not Applicable" or "N/A",
   → Institution student transferred to **should** be "N/A" or "Unknown"
   → Stage of transfer **should** be "Not Applicable" or "N/A"
-- If "Stage of Transfer" = "Not Applicable" or "Transfer rejected",
+- If "Stage of Transfer" = "Not Applicable" or "N/A" or "Transfer rejected",
   → Institution student transferred to **should** be "N/A" or "Unknown"
   → else Institution student transferred to **can** be any value except "N/A"
 Vice versa: If institution is "N/A" or "Not Applicable", stage must be "Not Applicable" or "N/A"
@@ -171,4 +171,5 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
