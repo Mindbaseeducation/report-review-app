@@ -77,10 +77,10 @@ If "Academic Concerns" = "No concerns", then "Actions Taken on Academic Concerns
 Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
 
 🔹 Rule 2: Academic Improvement Plan Required  
-If "Actions Taken on Academic Concerns" = "Academic Improvement Plan initiated":
+If "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place":
 - Then "Is student on an Improvement Plan?" = "Yes"
 - And "Improvement Plan Progress" ≠ "Not applicable to student"  
-Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Academic Improvement Plan initiated"
+Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place"
 
 🔹 Rule 3: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable" or "N/A",
@@ -171,5 +171,6 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
