@@ -40,8 +40,6 @@ Below is a student's monthly report:
 🔁 Transfer:
 - Type of Transfer: {row['Type of Transfer']}
 - Stage of Transfer: {row['Stage of Transfer']}
-- Institution student transferred to: {row['Institution student transferred to']}
-- Mentor support provided in transfer: {row['Mentor support provided in transfer']}
 
 💡 Well-being:
 - Student well-being concerns: {row['Student well-being concerns']}
@@ -83,13 +81,8 @@ If "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in pl
 Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place"
 
 🔹 Rule 3: Transfer Logic  
-- If "Type of Transfer" = "Not Applicable" or "N/A",
-  → Institution student transferred to **should** be "N/A" or "Unknown"
-  → Stage of transfer **should** be "Not Applicable" or "N/A"
-- If "Stage of Transfer" = "Not Applicable" or "N/A" or "Transfer rejected",
-  → Institution student transferred to **should** be "N/A" or "Unknown"
-  → else Institution student transferred to **can** be any value except "N/A"
-Vice versa: If institution is "N/A" or "Not Applicable", stage must be "Not Applicable" or "N/A"
+- If "Type of Transfer" = "Not Applicable" or "N/A", then "Stage of transfer" **should** be "N/A"
+Vice versa: If "Stage of transfer" is "N/A", then "Type of Transfer" must be "Not Applicable" or "N/A"
 
 🔹 Rule 4: Well-being Consistency  
 If "Student well-being concerns" = "None", then "Actions taken on student well-being concerns" = "None"  
@@ -171,6 +164,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
