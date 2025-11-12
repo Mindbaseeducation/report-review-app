@@ -8,7 +8,7 @@ import re
 openai.api_key = st.secrets["openai"]["api_key"]
 
 st.set_page_config(page_title="Report Reviewer", layout="wide")
-st.title("📘 Monthly Tier Report Review")
+st.title("📘 Monthly Progress Report Review")
 
 uploaded_file = st.file_uploader("Upload Excel file", type=["xlsx"])
 
@@ -25,7 +25,7 @@ Below is a student's monthly report:
 
 📘 Study Status:
 - Khotwa Program Status: {row['Khotwa Program Status']}
-- Current Academic Status: {row['Current Academic Status']}
+- Next expected grade release date: {row['Next expected grade release date']}
 
 📘 Academic:
 - Academic Concerns: {row['Academic Concerns']}
@@ -164,3 +164,4 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
