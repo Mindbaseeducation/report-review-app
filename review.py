@@ -100,7 +100,7 @@ Vice versa: If Notes mention student's withdrawal, then "Khotwa Program Status" 
 
 🔹 Rule 7: Grade Release Date Check  
 If "Khotwa Program Status" contains a word "Active", then Year of "Next expected grade release date" (if not "N/A") should not be "1900"  
-Vice versa: If Year of "Next expected grade release date" is "1900", then "Khotwa Program Status" must contain a word "Active"
+Vice versa: If Year of "Next expected grade release date" is "1900", then "Khotwa Program Status" must not contain a word "Active"
 
 🔹 Rule 8: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it  
@@ -164,3 +164,4 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
