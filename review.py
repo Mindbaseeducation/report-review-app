@@ -72,14 +72,16 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 📜 LOGICAL RULES TO VALIDATE (ALL ARE EQUALLY IMPORTANT):
 
 🔹 Rule 1: Academic Concerns ↔ Actions Taken  
-If "Academic Concerns" = "No concerns", then "Actions Taken on Academic Concerns" must be "No action needed"  
+- If "Academic Concerns" = "No concerns", then "Actions Taken on Academic Concerns" must be "No action needed"  
 Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
+- If "Academic Concerns" = "On an AIP / EIP", then "Actions Taken on Academic Concerns" must be "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place"
+Vice versa: If "Actions Taken" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place", then "Academic Concerns" must be "On an AIP / EIP"
 
 🔹 Rule 2: Academic Improvement Plan Required  
-If "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place":
+If "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place":
 - Then "Is student on an Improvement Plan?" = "Yes"
-- And "Improvement Plan Progress" ≠ "Not applicable to student"  
-Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place"
+- And "Improvement Plan Progress" ≠ "N/A"  
+Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place"
 
 🔹 Rule 3: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable" or "N/A", then "Stage of Transfer" **should** be "N/A" 
@@ -166,6 +168,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
