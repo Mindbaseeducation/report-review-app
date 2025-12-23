@@ -25,6 +25,7 @@ Below is a student's monthly report:
 
 📘 Study Status:
 - Khotwa Program Status: {row['Khotwa Program Status']}
+- Current Academic Status: {row['Current Academic Status']}
 - Next expected grade release date: {row['Next expected grade release date']}
 - Date of meeting with student: {row['Date of meeting with student']}
 
@@ -186,6 +187,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
