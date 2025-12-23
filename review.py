@@ -82,8 +82,8 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
 - If "Academic Concerns" = "On an AIP / EIP", then "Actions Taken on Academic Concerns" must be "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place"
 Vice versa: If "Actions Taken" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place", then "Academic Concerns" must be "On an AIP / EIP"
-- If "Actions Taken on Academic Concerns" = "Held meeting with ADEK advisor", then "Reason for contact with ADEK Advisor" ≠ "N/A" and "Date of meeting with ADEK Advisor" ≠ "N/A"
-Vice versa: If "Reason for contact with ADEK Advisor" ≠ "N/A" and "Date of meeting with ADEK Advisor" ≠ "N/A", then "Actions Taken on Academic Concerns" = "Held meeting with ADEK advisor"
+- If "Actions Taken on Academic Concerns" = "Held meeting with ADEK advisor", then "Reason for contact with ADEK Advisor" ≠ "No contact made"
+Vice versa: If "Reason for contact with ADEK Advisor" = "No contact made", then "Actions Taken on Academic Concerns" ≠ "Held meeting with ADEK advisor"
 
 🔹 Rule 2: Academic Improvement Plan Required  
 If "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place":
@@ -184,6 +184,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
