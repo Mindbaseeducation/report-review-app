@@ -26,6 +26,7 @@ Below is a student's monthly report:
 📘 Study Status:
 - Khotwa Program Status: {row['Khotwa Program Status']}
 - Next expected grade release date: {row['Next expected grade release date']}
+- Date of meeting with student: {row['Date of meeting with student']}
 
 📘 Academic:
 - Academic Concerns: {row['Academic Concerns']}
@@ -50,6 +51,10 @@ Below is a student's monthly report:
 - Student participation in any extracurricular activity?: {row['Student participation in any extracurricular activity?']}
 - Details of extracurricular activities: {row['Details of extracurricular activities']}
 
+📘 Pathway Alteration:
+- Pathway Alteration: {row['Pathway Alteration']}
+- Details of Pathway Alteration: {row['Details of Pathway Alteration']}
+
 📝 Notes on student:
 {row['Student notes']}
 
@@ -60,7 +65,8 @@ Below is a student's monthly report:
 You must interpret the “Notes on student” to verify the logical correctness of:
 - "Academic Concerns" and "Actions Taken on Academic Concerns"
 - "Khotwa Program Status"
-- Well-being and transfer actions
+- "Student well-being concerns"
+- "Type of Transfer"
 - All other key fields
 
 Each rule below is **mandatory**. If any one rule is violated, you must:
@@ -76,6 +82,8 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
 - If "Academic Concerns" = "On an AIP / EIP", then "Actions Taken on Academic Concerns" must be "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place"
 Vice versa: If "Actions Taken" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place", then "Academic Concerns" must be "On an AIP / EIP"
+- If "Actions Taken on Academic Concerns" = "Held meeting with ADEK advisor", then "Reason for contact with ADEK Advisor" ≠ "N/A" and "Date of meeting with ADEK Advisor" ≠ "N/A"
+Vice versa: If "Reason for contact with ADEK Advisor" ≠ "N/A" and "Date of meeting with ADEK Advisor" ≠ "N/A", then "Actions Taken on Academic Concerns" = "Held meeting with ADEK advisor"
 
 🔹 Rule 2: Academic Improvement Plan Required  
 If "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place":
@@ -89,7 +97,7 @@ Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is liste
 Vice versa: If "Stage of Transfer" is "N/A" and "Applications Submitted" is "N/A" or 0, then "Type of Transfer" must be "Not Applicable" or "N/A"
 
 🔹 Rule 4: Well-being Consistency  
-If "Student well-being concerns" = "None", then "Actions taken on student well-being concerns" = "None"  
+If "Student well-being concerns" = "None", then "Actions taken on student well-being concerns" = "None", and should be verified by "Notes on student" if the "Student well-being concerns" ≠ "None"
 Vice versa: If actions = "None", concerns must also be "None"
 
 🔹 Rule 5: Extracurricular Activity  
@@ -106,7 +114,15 @@ Vice versa: If Notes mention student's withdrawal, then "Khotwa Program Status" 
 If "Khotwa Program Status" = "Active-Enrolled", then Year of "Next expected grade release date" (if not "N/A") should not be "1900"  
 Vice versa: If Year of "Next expected grade release date" is "1900", then "Khotwa Program Status" must not be "Active-Enrolled"
 
-🔹 Rule 8: Additional Notes-Based Validations  
+🔹 Rule 8: Pathway Alteration Check
+If "Pathway Alteration" ≠ "No", then "Details of Pathway Alteration" ≠ "N/A"
+If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alteration" ≠ "No"
+
+🔹 Rule 9: Date of meeting with student Check
+If "Date of meeting with student" is "1900", then "Academic Concerns" = "Missed mandatory mentor 1:1 session"
+If "Academic Concerns" = "Missed mandatory mentor 1:1 session", then "Date of meeting with student" should be "1900"
+
+🔹 Rule 10: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it  
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of critical concerns", the Notes must **justify** it
 
@@ -168,6 +184,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
