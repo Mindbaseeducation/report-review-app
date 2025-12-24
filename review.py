@@ -94,7 +94,7 @@ Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is liste
 
 🔹 Rule 3: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable" or "N/A", then "Stage of Transfer" **should** be "N/A" 
-- If "Type of Transfer" <> "Not Applicable" or "N/A", then "Applications Submitted" **should** be greater than 0
+- If "Type of Transfer" ≠ "Not Applicable" or "N/A", then "Applications Submitted" **should** be greater than 0
 Vice versa: If "Stage of Transfer" is "N/A" and "Applications Submitted" is "N/A" or 0, then "Type of Transfer" must be "Not Applicable" or "N/A"
 - If "Type of Transfer" ≠ "Not Applicable", then "Current Academic Status" **should** justify the transfer
 
@@ -190,6 +190,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
