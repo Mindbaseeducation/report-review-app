@@ -25,7 +25,7 @@ Below is a student's monthly report:
 
 📘 Study Status:
 - Khotwa Program Status: {row['Khotwa Program Status']}
-- Current Academic Status: {row['Current Academic Status']}
+- Current Academic Status: {row['Current Academic Status']} 
 - Next expected grade release date: {row['Next expected grade release date']}
 - Date of meeting with student: {row['Date of meeting with student']}
 
@@ -118,14 +118,14 @@ Vice versa: If Year of "Next expected grade release date" is "1900", then "Khotw
 
 🔹 Rule 8: Pathway Alteration Check
 If "Pathway Alteration" ≠ "No", then "Details of Pathway Alteration" ≠ "N/A"
-If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alteration" ≠ "No"
+Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alteration" ≠ "No"
 
 🔹 Rule 9: Date of meeting with student Check
 If "Date of meeting with student" is "1900", then "Academic Concerns" = "Missed mandatory mentor 1:1 session"
-If "Academic Concerns" = "Missed mandatory mentor 1:1 session", then "Date of meeting with student" should be "1900"
+Vice Versa: If "Academic Concerns" = "Missed mandatory mentor 1:1 session", then "Date of meeting with student" should be "1900"
 
 🔹 Rule 10: ADEK Advisor Connect Check
-- If "Date of meeting with ADEK Advisor" ≠ "N/A", then "Reason for contact with ADEK Advisor" ≠ "No contact made"
+If "Date of meeting with ADEK Advisor" ≠ "N/A", then "Reason for contact with ADEK Advisor" ≠ "No contact made"
 Vice Versa: If "Reason for contact with ADEK Advisor" ≠ "No contact made", then "Date of meeting with ADEK Advisor" ≠ "N/A"
 
 🔹 Rule 11: Additional Notes-Based Validations  
@@ -140,7 +140,7 @@ Return the result **strictly** in the following format — do not add any explan
 Status: [Approved / Need Clarification]  
 Remark: List **all violated rules** together in the format:
         Rule A violated: explanation; Rule B violated: explanation; Rule C violated: explanation; Rule D violated: explanation
-
+        
 """
 
     def extract_field(lines, label):
@@ -190,6 +190,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
