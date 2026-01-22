@@ -124,11 +124,7 @@ Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alterati
 If "Date of meeting with student" is "1900", then "Academic Concerns" = "Missed mandatory mentor 1:1 session"
 Vice Versa: If "Academic Concerns" = "Missed mandatory mentor 1:1 session", then "Date of meeting with student" should be "1900"
 
-🔹 Rule 10: ADEK Advisor Connect Check
-If "Date of meeting with ADEK Advisor" ≠ "N/A", then "Reason for contact with ADEK Advisor" ≠ "No contact made" or "Missed 1:1 mandatory session"
-Vice Versa: If "Reason for contact with ADEK Advisor" ≠ "No contact made" or "Missed 1:1 mandatory session", then "Date of meeting with ADEK Advisor" ≠ "N/A"
-
-🔹 Rule 11: Additional Notes-Based Validations  
+🔹 Rule 10: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it  
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of critical concerns", the Notes must **justify** it
 
@@ -190,6 +186,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
