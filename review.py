@@ -126,7 +126,7 @@ Vice Versa: If "Academic Concerns" = "Missed mandatory mentor 1:1 session", then
 
 🔹 Rule 10: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it  
-If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of critical concerns", the Notes must **justify** it
+If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of behavioral concerns impacting academics", the Notes must **justify** it
 
 ---
 
@@ -186,6 +186,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
