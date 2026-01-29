@@ -25,8 +25,7 @@ Below is a student's monthly report:
 
 📘 Study Status:
 - Khotwa Program Status: {row['Khotwa Program Status']}
-- Current Academic Status: {row['Current Academic Status']} 
-- Next expected grade release date: {row['Next expected grade release date']}
+- Current Academic Status: {row['Current Academic Status']}
 - Date of meeting with student: {row['Date of meeting with student']}
 
 📘 Academic:
@@ -37,7 +36,6 @@ Below is a student's monthly report:
 
 📞 Mentor Contact with ADEK Advisor:
 - Reason for contact with ADEK Advisor: {row['Reason for contact with ADEK Advisor']}
-- Date of meeting with ADEK Advisor: {row['Date of meeting with ADEK Advisor']}
 
 🔁 Transfer:
 - Type of Transfer: {row['Type of Transfer']}
@@ -108,24 +106,20 @@ If participation ≠ "No":
 Vice versa: If "Details of extracurricular activities" is filled with values neither "N/A" nor "Not Applicable", participation cannot be "No"
 
 🔹 Rule 6: Khotwa Status  
-If "Khotwa Program Status" = "Withdrawal / Termination Requested - Pending ADEK approval" or "Withdrawal / Termination approved by ADEK",  
+If "Khotwa Program Status" = "Withdrawal / Termination Requested - Pending ADEK approval" or "Withdrawal / Termination approved by ADEK"
 → Then Notes must **justify** it  
 Vice versa: If Notes mention student's withdrawal, then "Khotwa Program Status" should be "Withdrawal / Termination Requested - Pending ADEK approval" or "Withdrawal / Termination approved by ADEK"
 
-🔹 Rule 7: Grade Release Date Check  
-If "Khotwa Program Status" = "Active-Enrolled", then Year of "Next expected grade release date" (if not "N/A") should not be "1900"  
-Vice versa: If Year of "Next expected grade release date" is "1900", then "Khotwa Program Status" must not be "Active-Enrolled"
-
-🔹 Rule 8: Pathway Alteration Check
+🔹 Rule 7: Pathway Alteration Check
 If "Pathway Alteration" ≠ "No", then "Details of Pathway Alteration" ≠ "N/A"
 Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alteration" ≠ "No"
 
-🔹 Rule 9: Date of meeting with student Check
+🔹 Rule 8: Date of meeting with student Check
 If "Date of meeting with student" is "1900", then "Academic Concerns" = "Missed mandatory mentor 1:1 session"
 Vice Versa: If "Academic Concerns" = "Missed mandatory mentor 1:1 session", then "Date of meeting with student" should be "1900"
 
-🔹 Rule 10: Additional Notes-Based Validations  
-If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it  
+🔹 Rule 9: Additional Notes-Based Validations  
+If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of behavioral concerns impacting academics", the Notes must **justify** it
 
 ---
@@ -186,6 +180,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
