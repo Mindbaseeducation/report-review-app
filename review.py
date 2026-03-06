@@ -25,17 +25,14 @@ Below is a student's monthly report:
 
 📘 Study Status:
 - Khotwa Program Status: {row['Khotwa Program Status']}
+- Reason for student not taking classes: {row['Reason for student not taking classes']}
+- Reason why student may not return: {row['Reason why student may not return']}
 - Current Academic Status: {row['Current Academic Status']}
 - Date of meeting with student: {row['Date of meeting with student']}
 
 📘 Academic:
 - Academic Concerns: {row['Academic Concerns']}
 - Actions Taken on Academic Concerns: {row['Actions Taken on Academic Concerns']}
-- Is student on an Improvement Plan?: {row['Is student on an Improvement Plan?']}
-- Improvememt Plan Progress: {row['Improvememt Plan Progress']}
-
-📞 Mentor Contact with ADEK Advisor:
-- Reason for contact with ADEK Advisor: {row['Reason for contact with ADEK Advisor']}
 
 🔁 Transfer:
 - Type of Transfer: {row['Type of Transfer']}
@@ -79,46 +76,35 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 🔹 Rule 1: Academic Concerns ↔ Actions Taken  
 - If "Academic Concerns" = "No concerns", then "Actions Taken on Academic Concerns" must be "No action needed"  
 Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
-- If "Academic Concerns" = "On an AIP / EIP", then "Actions Taken on Academic Concerns" must be "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place"
-Vice versa: If "Actions Taken" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place", then "Academic Concerns" must be "On an AIP / EIP"
-- If "Actions Taken on Academic Concerns" = "Held meeting with ADEK advisor", then "Reason for contact with ADEK Advisor" ≠ "No contact made"
-Vice versa: If "Reason for contact with ADEK Advisor" = "No contact made", then "Actions Taken on Academic Concerns" ≠ "Held meeting with ADEK advisor"
 
-🔹 Rule 2: Academic Improvement Plan Required  
-If "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place":
-- Then "Is student on an Improvement Plan?" = "Yes"
-- And "Improvement Plan Progress" ≠ "N/A"  
-Vice versa: If "Is student on an Improvement Plan?" = "Yes" or progress is listed, then "Actions Taken on Academic Concerns" = "Academic Improvement Plan (AIP) in place" or "ESL English Improvement Plan (EIP) in place"
-
-🔹 Rule 3: Transfer Logic  
+🔹 Rule 2: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable" or "N/A", then "Stage of Transfer" **should** be "N/A" 
 - If "Type of Transfer" ≠ "Not Applicable" or "N/A", then "Applications Submitted" **should** be greater than 0
 Vice versa: If "Stage of Transfer" is "N/A" and "Applications Submitted" is "N/A" or 0, then "Type of Transfer" must be "Not Applicable" or "N/A"
 - If "Type of Transfer" ≠ "Not Applicable", then "Current Academic Status" **should** justify the transfer
 
-🔹 Rule 4: Well-being Consistency  
-If "Student well-being concerns" = "None", then "Actions taken on student well-being concerns" = "None", and should be verified by "Notes on student" if the "Student well-being concerns" ≠ "None"
+🔹 Rule 3: Well-being Consistency  
+- If "Student well-being concerns" = "None", then "Actions taken on student well-being concerns" = "None", and should be verified by "Notes on student" if the "Student well-being concerns" ≠ "None"
 Vice versa: If actions = "None", concerns must also be "None"
 
-🔹 Rule 5: Extracurricular Activity  
+🔹 Rule 4: Extracurricular Activity  
 If participation ≠ "No":
-- Then "Details of extracurricular activities" must not be "N/A" or "Not Applicable"  
+→ Then "Details of extracurricular activities" must not be "N/A" or "Not Applicable"  
 Vice versa: If "Details of extracurricular activities" is filled with values neither "N/A" nor "Not Applicable", participation cannot be "No"
 
-🔹 Rule 6: Khotwa Status  
-If "Khotwa Program Status" = "Withdrawal / Termination Requested - Pending ADEK approval" or "Withdrawal / Termination approved by ADEK"
+🔹 Rule 5: Khotwa Status  
+If "Khotwa Program Status" = "Scholarship Active - Not currently taking classes but planning to return" or "Scholarship Active - May not return"
 → Then Notes must **justify** it  
-Vice versa: If Notes mention student's withdrawal, then "Khotwa Program Status" should be "Withdrawal / Termination Requested - Pending ADEK approval" or "Withdrawal / Termination approved by ADEK"
 
-🔹 Rule 7: Pathway Alteration Check
+🔹 Rule 6: Pathway Alteration Check
 If "Pathway Alteration" ≠ "No", then "Details of Pathway Alteration" ≠ "N/A"
 Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alteration" ≠ "No"
 
-🔹 Rule 8: Date of meeting with student Check
+🔹 Rule 7: Date of meeting with student Check
 If "Date of meeting with student" is "1900", then "Academic Concerns" = "Missed mandatory mentor 1:1 session"
 Vice Versa: If "Academic Concerns" = "Missed mandatory mentor 1:1 session", then "Date of meeting with student" should be "1900"
 
-🔹 Rule 9: Additional Notes-Based Validations  
+🔹 Rule 8: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of behavioral concerns impacting academics", the Notes must **justify** it
 
@@ -180,6 +166,7 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
+
 
 
 
