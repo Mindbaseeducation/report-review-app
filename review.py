@@ -27,6 +27,7 @@ Below is a student's monthly report:
 - Khotwa Program Status: {row['Khotwa Program Status']}
 - Reason for student not taking classes: {row['Reason for student not taking classes']}
 - Reason why student may not return: {row['Reason why student may not return']}
+- Master Academic Status: {row['Master Academic Status']}
 - Current Academic Status: {row['Current Academic Status']}
 - Date of meeting with student: {row['Date of meeting with student']}
 
@@ -97,14 +98,20 @@ If "Khotwa Program Status" = "Scholarship Active - Not currently taking classes 
 → Then Notes must **justify** it  
 
 🔹 Rule 6: Pathway Alteration Check
-If "Pathway Alteration" ≠ "No", then "Details of Pathway Alteration" ≠ "N/A"
+- If "Pathway Alteration" ≠ "No", then "Details of Pathway Alteration" ≠ "N/A"
 Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alteration" ≠ "No"
+- If "Stage of Transfer" = "N/A", then "Pathway Alteration" should be "No"
+Vice Versa: If "Pathway Alteration" is "No", then "Stage of Transfer" should be "N/A"
 
 🔹 Rule 7: Date of meeting with student Check
 If "Date of meeting with student" is "1900", then "Academic Concerns" = "Missed mandatory mentor 1:1 session"
 Vice Versa: If "Academic Concerns" = "Missed mandatory mentor 1:1 session", then "Date of meeting with student" should be "1900"
 
-🔹 Rule 8: Additional Notes-Based Validations  
+🔹 Rule 8: Academic Hierarchy Check
+Ensure that academic status progression follows this strict hierarchy: "English Program Courses Only" or "Foundation Courses" → "Hybrid / Bridge" → "Associate Degree Courses Only" or "Diploma" → "Bachelor Degree Courses Only"
+The transition from "Master Academic Status" to "Current Academic Status" must always move forward or remain at the same level within this hierarchy
+
+🔹 Rule 9: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of behavioral concerns impacting academics", the Notes must **justify** it
 
@@ -116,7 +123,7 @@ Return the result **strictly** in the following format — do not add any explan
 Status: [Approved / Need Clarification]  
 Remark: List **all violated rules** together in the format:
         Rule A violated: explanation; Rule B violated: explanation; Rule C violated: explanation; Rule D violated: explanation
-        
+
 """
 
     def extract_field(lines, label):
