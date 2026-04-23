@@ -62,7 +62,7 @@ Below is a student's monthly report:
 You must interpret the “Notes on student” to verify the logical correctness of:
 - "Academic Concerns" and "Actions Taken on Academic Concerns"
 - "Khotwa Program Status"
-- "Student well-being concerns"
+- "Student well-being concerns" and "Actions taken on student well-being concerns"
 - "Type of Transfer"
 - All other key fields
 
@@ -104,8 +104,8 @@ Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alterati
 Vice Versa: If "Pathway Alteration" is "No", then "Stage of Transfer" should be "N/A"
 
 🔹 Rule 7: Date of meeting with student Check
-If "Date of meeting with student" is "1900", then "Academic Concerns" = "Missed mandatory mentor 1:1 session"
-Vice Versa: If "Academic Concerns" = "Missed mandatory mentor 1:1 session", then "Date of meeting with student" should be "1900"
+If "Date of meeting with student" is "1900" and "Reason for student not taking classes" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
+Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason for student not taking classes" = "N/A", then "Date of meeting with student" should be "1900"
 
 🔹 Rule 8: Academic Hierarchy Check
 Ensure that academic status progression follows this strict hierarchy: "English Program Courses Only" or "Foundation Courses" → "Hybrid / Bridge" → "Associate Degree Courses Only" or "Diploma" → "Bachelor Degree Courses Only"
