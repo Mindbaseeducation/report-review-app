@@ -111,7 +111,11 @@ Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session
 Ensure that academic status progression follows this strict hierarchy: "English Program Courses Only" or "Foundation Courses" → "Hybrid / Bridge" → "Associate Degree Courses Only" or "Diploma" → "Bachelor Degree Courses Only"
 The transition from "Master Academic Status" to "Current Academic Status" must always move forward or remain at the same level within this hierarchy
 
-🔹 Rule 9: Additional Notes-Based Validations  
+🔹 Rule 9: Reason for Absence Check
+If the "Reason for student not taking classes" ≠ "N/A", then the proper details and context of the reason mentioned should be provided in "Notes on student"
+If the "Reason why student may not return" ≠ "N/A", then the proper details and context of the reason mentioned should be provided in "Notes on student"
+
+🔹 Rule 10: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of behavioral concerns impacting academics", the Notes must **justify** it
 
@@ -173,22 +177,4 @@ Remark: List **all violated rules** together in the format:
                 file_name="Reviewed_Students.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
