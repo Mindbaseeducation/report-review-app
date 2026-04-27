@@ -112,8 +112,8 @@ Ensure that academic status progression follows this strict hierarchy: "English 
 The transition from "Master Academic Status" to "Current Academic Status" must always move forward or remain at the same level within this hierarchy
 
 🔹 Rule 9: Reason for Absence Check
-If the "Reason for student not taking classes" ≠ "N/A", then the proper details and context of the reason mentioned should be provided in "Notes on student"
-If the "Reason why student may not return" ≠ "N/A", then the proper details and context of the reason mentioned should be provided in "Notes on student"
+If the "Reason for student not taking classes" ≠ "N/A", then the adequate details and context of the reason mentioned should be provided in "Notes on student"
+If the "Reason why student may not return" ≠ "N/A", then the adequate details and context of the reason mentioned should be provided in "Notes on student"
 
 🔹 Rule 10: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
