@@ -29,7 +29,10 @@ Below is a student's monthly report:
 - Reason why student may not return: {row['Reason why student may not return']}
 - Master Academic Status: {row['Master Academic Status']}
 - Current Academic Status: {row['Current Academic Status']}
+- Flag for 1:1 mentoring session: {row['Did Mentoring Session take place?']}
 - Date of meeting with student: {row['Date of meeting with student']}
+- 1:1 Mentoring Conversation: {row['1:1 Mentoring Conversation (AI-Generated notes)']}
+- Transcript Upload Link: {row['Mentor Session Transcript Upload Link']}
 
 📘 Academic:
 - Academic Concerns: {row['Academic Concerns']}
@@ -44,9 +47,12 @@ Below is a student's monthly report:
 - Student well-being concerns: {row['Student well-being concerns']}
 - Actions taken on student well-being concerns: {row['Actions taken on student well-being concerns']}
 
-🎯 Extracurricular:
-- Student participation in any extracurricular activity?: {row['Student participation in any extracurricular activity?']}
-- Details of extracurricular activities: {row['Details of extracurricular activities']}
+🎯 Address:
+- Accommodation Type: {row['Accommodation Type']}
+- Address Line 1: {row['Address Line 1']}
+- Address Line 2: {row['Address Line 2']}
+- Address City: {row['Address City']}
+- Address State: {row['Address State']}
 
 📘 Pathway Alteration:
 - Pathway Alteration: {row['Pathway Alteration']}
@@ -87,14 +93,16 @@ Vice versa: If "Stage of Transfer" is "N/A" and "Applications Submitted" is "N/A
 - If "Student well-being concerns" = "None", then "Actions taken on student well-being concerns" = "None", and should be verified by "Notes on student" if the "Student well-being concerns" ≠ "None"
 Vice versa: If actions = "None", concerns must also be "None"
 
-🔹 Rule 4: Extracurricular Activity  
-If participation ≠ "No":
-→ Then "Details of extracurricular activities" must not be "N/A" or "Not Applicable"  
-Vice versa: If "Details of extracurricular activities" is filled with values neither "N/A" nor "Not Applicable", participation cannot be "No"
+🔹 Rule 4: Address Check  
+- If "Khotwa Program Status" = "Scholarship Active - Currently taking classes", then "Accommodation Type" must not be "Student in Transition - Address will be updated soon" or "Student under withdrawal - Termination (Address not available)"
+Vice Versa: If "Accommodation Type" is "Student in Transition - Address will be updated soon" or "Student under withdrawal - Termination (Address not available)", then "Khotwa Program Status" must not be "Scholarship Active - Currently taking classes"
+- If "Accommodation Type" is not "Student in Transition - Address will be updated soon" or "Student under withdrawal - Termination (Address not available)", then the combined values of "Address Line 1", "Address Line 2", "Address City", and "Address State" should form a complete, meaningful, and logically valid address
 
 🔹 Rule 5: Khotwa Status  
 If "Khotwa Program Status" = "Scholarship Active - Not currently taking classes but planning to return" or "Scholarship Active - May not return" or "Scholarship Active - New Student not taking classes yet"
-→ Then Notes must **justify** it  
+→ Then Notes must **justify** it
+If "Khotwa Program Status" = "Scholarship Active - New Student not taking classes yet", then "Type of Transfer" **should** be "Not Applicable"
+Vice versa: If "Type of Transfer" = "Not Applicable", then "Khotwa Program Status" **should** be "Scholarship Active - New Student not taking classes yet"
 
 🔹 Rule 6: Pathway Alteration Check
 - If "Pathway Alteration" ≠ "No", then "Details of Pathway Alteration" ≠ "N/A"
@@ -114,7 +122,13 @@ The transition from "Master Academic Status" to "Current Academic Status" must a
 If the "Reason for student not taking classes" ≠ "N/A", then "Notes on student" must include sufficient details and context explaining that reason
 If the "Reason why student may not return" ≠ "N/A", then "Notes on student" must include sufficient details, context explaining that reason, and Stop Salary Status
 
-🔹 Rule 10: Additional Notes-Based Validations  
+🔹 Rule 10: Mentoring Session & Transcript Validation Check
+- If "Flag for 1:1 mentoring session" = "Yes", then "Date of meeting with student" must not be a future date (i.e., should be less than or equal to the current date)
+Vice Versa: If "Date of meeting with student" is a future date (greater than the current date), then "Flag for 1:1 mentoring session" must be "No"
+- If "1:1 Mentoring Conversation" = "N/A", then "Transcript Upload Link" ≠ "N/A"
+Vice Versa: If "Transcript Upload Link" = "N/A", then "1:1 Mentoring Conversation" ≠ "N/A"
+
+🔹 Rule 11: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of critical concerns", the Notes must **justify** it
 
