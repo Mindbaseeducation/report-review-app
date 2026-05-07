@@ -102,7 +102,6 @@ Vice Versa: If "Accommodation Type" is "Student in Transition - Address will be 
 If "Khotwa Program Status" = "Scholarship Active - Not currently taking classes but planning to return" or "Scholarship Active - May not return" or "Scholarship Active - New Student not taking classes yet"
 → Then Notes must **justify** it
 If "Khotwa Program Status" = "Scholarship Active - New Student not taking classes yet", then "Type of Transfer" **should** be "Not Applicable"
-Vice versa: If "Type of Transfer" = "Not Applicable", then "Khotwa Program Status" **should** be "Scholarship Active - New Student not taking classes yet"
 
 🔹 Rule 6: Pathway Alteration Check
 - If "Pathway Alteration" ≠ "No", then "Details of Pathway Alteration" ≠ "N/A"
