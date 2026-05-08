@@ -31,8 +31,6 @@ Below is a student's monthly report:
 - Current Academic Status: {row['Current Academic Status']}
 - Flag for 1:1 mentoring session: {row['Did Mentoring Session take place?']}
 - Date of meeting with student: {row['Date of meeting with student']}
-- 1:1 Mentoring Conversation: {row['1:1 Mentoring Conversation (AI-Generated notes)']}
-- Transcript Upload Link: {row['Mentor Session Transcript Upload Link']}
 
 📘 Academic:
 - Academic Concerns: {row['Academic Concerns']}
@@ -83,6 +81,7 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 🔹 Rule 1: Academic Concerns ↔ Actions Taken  
 - If "Academic Concerns" = "No concerns", then "Actions Taken on Academic Concerns" must be "No action needed"  
 Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
+- If "Academic Concerns" includes "Failed course(s)", then "Actions Taken on Academic Concerns" must include at least one of the following: "AIP", "EIP", or "AAP"
 
 🔹 Rule 2: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable" or "N/A", then "Stage of Transfer" **should** be "N/A" 
@@ -110,6 +109,8 @@ Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alterati
 🔹 Rule 7: Date of meeting with student Check
 - If "Flag for 1:1 mentoring session" = "No" and "Reason for student not taking classes" = "N/A" and "Reason why student may not return" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
 Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason for student not taking classes" = "N/A" and "Reason why student may not return" = "N/A", then "Flag for 1:1 mentoring session" = "No"
+- If "Flag for 1:1 mentoring session" = "Yes", then "Date of meeting with student" must not be a future date (i.e., should be less than or equal to the current date)
+Vice Versa: If "Date of meeting with student" is a future date (greater than the current date), then "Flag for 1:1 mentoring session" must be "No"
 
 🔹 Rule 8: Academic Hierarchy Check
 Ensure that academic status progression follows this strict hierarchy: "English Program Courses Only" or "Foundation Courses" → "Hybrid / Bridge" → "Associate Degree Courses Only" or "Diploma" → "Bachelor Degree Courses Only"
@@ -119,13 +120,7 @@ The transition from "Master Academic Status" to "Current Academic Status" must a
 If the "Reason for student not taking classes" ≠ "N/A", then "Notes on student" must include sufficient details and context explaining that reason
 If the "Reason why student may not return" ≠ "N/A", then "Notes on student" must include sufficient details, context explaining that reason, and Stop Salary Status
 
-🔹 Rule 10: Mentoring Session & Transcript Validation Check
-- If "Flag for 1:1 mentoring session" = "Yes", then "Date of meeting with student" must not be a future date (i.e., should be less than or equal to the current date)
-Vice Versa: If "Date of meeting with student" is a future date (greater than the current date), then "Flag for 1:1 mentoring session" must be "No"
-- If "Flag for 1:1 mentoring session" = "Yes" and "1:1 Mentoring Conversation" = "N/A", then "Transcript Upload Link" ≠ "N/A"
-Vice Versa: If "Flag for 1:1 mentoring session" = "Yes" and "Transcript Upload Link" = "N/A", then "1:1 Mentoring Conversation" ≠ "N/A"
-
-🔹 Rule 11: Additional Notes-Based Validations  
+🔹 Rule 10: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of critical concerns", the Notes must **justify** it
 
