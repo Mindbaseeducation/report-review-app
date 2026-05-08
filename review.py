@@ -108,10 +108,8 @@ If "Khotwa Program Status" = "Scholarship Active - New Student not taking classe
 Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alteration" ≠ "No"
 
 🔹 Rule 7: Date of meeting with student Check
-- If "Flag for 1:1 mentoring session" = "No" and "Reason for student not taking classes" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
-Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason for student not taking classes" = "N/A", then "Flag for 1:1 mentoring session" = "No"
-- If "Flag for 1:1 mentoring session" = "No" and "Reason why student may not return" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
-Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason why student may not return" = "N/A", then "Flag for 1:1 mentoring session" = "No"
+- If "Flag for 1:1 mentoring session" = "No" and "Reason for student not taking classes" = "N/A" and "Reason why student may not return" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
+Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason for student not taking classes" = "N/A" and "Reason why student may not return" = "N/A", then "Flag for 1:1 mentoring session" = "No"
 
 🔹 Rule 8: Academic Hierarchy Check
 Ensure that academic status progression follows this strict hierarchy: "English Program Courses Only" or "Foundation Courses" → "Hybrid / Bridge" → "Associate Degree Courses Only" or "Diploma" → "Bachelor Degree Courses Only"
