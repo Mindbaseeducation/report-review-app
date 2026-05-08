@@ -81,7 +81,7 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 🔹 Rule 1: Academic Concerns ↔ Actions Taken  
 - If "Academic Concerns" = "No concerns", then "Actions Taken on Academic Concerns" must be "No action needed"  
 Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
-- If "Academic Concerns" includes "Failed course(s)", then "Actions Taken on Academic Concerns" must include at least one of the following: "AIP", "EIP", or "AAP"
+- If "Academic Concerns" includes "Failed course(s)", then "Actions Taken on Academic Concerns" must include at least one of the following: "AIP", "EIP", or "AAP", and this should be verified in "Notes on student"
 
 🔹 Rule 2: Transfer Logic  
 - If "Type of Transfer" = "Not Applicable" or "N/A", then "Stage of Transfer" **should** be "N/A" 
