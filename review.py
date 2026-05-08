@@ -108,10 +108,10 @@ If "Khotwa Program Status" = "Scholarship Active - New Student not taking classe
 Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alteration" ≠ "No"
 
 🔹 Rule 7: Date of meeting with student Check
-- If "Date of meeting with student" is "1900" and "Reason for student not taking classes" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
-Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason for student not taking classes" = "N/A", then "Date of meeting with student" should be "1900"
-- If "Date of meeting with student" is "1900" and "Reason why student may not return" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
-Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason why student may not return" = "N/A", then "Date of meeting with student" should be "1900"
+- If "Flag for 1:1 mentoring session" = "No" and "Reason for student not taking classes" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
+Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason for student not taking classes" = "N/A", then "Flag for 1:1 mentoring session" = "No"
+- If "Flag for 1:1 mentoring session" = "No" and "Reason why student may not return" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
+Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason why student may not return" = "N/A", then "Flag for 1:1 mentoring session" = "No"
 
 🔹 Rule 8: Academic Hierarchy Check
 Ensure that academic status progression follows this strict hierarchy: "English Program Courses Only" or "Foundation Courses" → "Hybrid / Bridge" → "Associate Degree Courses Only" or "Diploma" → "Bachelor Degree Courses Only"
@@ -124,8 +124,8 @@ If the "Reason why student may not return" ≠ "N/A", then "Notes on student" mu
 🔹 Rule 10: Mentoring Session & Transcript Validation Check
 - If "Flag for 1:1 mentoring session" = "Yes", then "Date of meeting with student" must not be a future date (i.e., should be less than or equal to the current date)
 Vice Versa: If "Date of meeting with student" is a future date (greater than the current date), then "Flag for 1:1 mentoring session" must be "No"
-- If "1:1 Mentoring Conversation" = "N/A", then "Transcript Upload Link" ≠ "N/A"
-Vice Versa: If "Transcript Upload Link" = "N/A", then "1:1 Mentoring Conversation" ≠ "N/A"
+- If "Flag for 1:1 mentoring session" = "Yes" and "1:1 Mentoring Conversation" = "N/A", then "Transcript Upload Link" ≠ "N/A"
+Vice Versa: If "Flag for 1:1 mentoring session" = "Yes" and "Transcript Upload Link" = "N/A", then "1:1 Mentoring Conversation" ≠ "N/A"
 
 🔹 Rule 11: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
