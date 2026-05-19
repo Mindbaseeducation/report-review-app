@@ -31,6 +31,7 @@ Below is a student's monthly report:
 - Current Academic Status: {row['Current Academic Status']}
 - Flag for 1:1 mentoring session: {row['Did Mentoring Session take place?']}
 - Date of meeting with student: {row['Date of meeting with student']}
+- High Priority Flagging: {row['High Priority Flagging']}
 
 📘 Academic:
 - Academic Concerns: {row['Academic Concerns']}
@@ -123,6 +124,7 @@ If the "Reason why student may not return" ≠ "N/A", then "Notes on student" mu
 🔹 Rule 10: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of critical concerns", the Notes must **justify** it
+If "High Priority Flagging" = "Yes", then Notes must **justify** it
 
 ---
 
