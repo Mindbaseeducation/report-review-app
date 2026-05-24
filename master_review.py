@@ -15,7 +15,10 @@ Pipeline (all in-process, no browser, no external apps):
   8. Merge -> reviewed dataset
   9. Grammar Check: Sensitive Word Flag + Incorrect Student Name Flag (from app.py)
  10. "Student Notes Word Count < 750" flag + final rename
- 
+
+SETUP
+    pip install streamlit pandas openpyxl openai
+
 """
 
 from __future__ import annotations
@@ -46,6 +49,10 @@ PATHWAY_COL = "Details of Pathway Alteration"
 WORDCOUNT_FLAG_COL = "Student Notes Word Count < 750"
 REVIEW_STATUS_COL = "Approved / Disapproved / Need Clarification"
 REVIEW_REMARK_COL = "HQ Remark"
+
+# Fixed values (no longer exposed in the sidebar).
+OPENAI_MODEL = "gpt-5-mini"
+REVIEW_WORKERS = 16
 
 DEFAULT_CLEAN_COLUMNS = [
     "Academic Concerns",
@@ -342,7 +349,7 @@ def review_student(row):
         return "Error", str(e)
 
 
-def review_dataframe(df, api_key=None, model="gpt-5-mini", max_workers=8, progress=None):
+def review_dataframe(df, api_key=None, model="gpt-5-mini", max_workers=REVIEW_WORKERS, progress=None):
     df = df.copy()
     if api_key:
         openai.api_key = api_key
@@ -435,7 +442,7 @@ def df_to_xlsx_bytes(df):
 # PIPELINE
 # ===========================================================================
 def run_pipeline(main_df, master_df, *, match_key="Student ADEK Application ID", report_date=None,
-                 api_key=None, model="gpt-5-mini", review_workers=8,
+                 api_key=None, model=OPENAI_MODEL, review_workers=REVIEW_WORKERS,
                  clean_columns=None, log=print):
     report_date = report_date or dt.date.today()
 
@@ -497,8 +504,6 @@ def main():
         st.header("Settings")
         match_key = st.text_input("Match key column", value="Student ADEK Application ID")
         report_date = st.date_input("Report date", value=dt.date.today())
-        model = st.text_input("OpenAI model", value="gpt-5-mini")
-        review_workers = st.slider("Parallel review workers", 1, 16, 8)
 
     # OpenAI key comes from Streamlit secrets:
     #   .streamlit/secrets.toml ->  [openai]
@@ -533,8 +538,8 @@ def main():
             try:
                 result_df, fname, stats = run_pipeline(
                     main_df, master_df, match_key=match_key, report_date=report_date,
-                    api_key=api_key or None, model=model,
-                    review_workers=review_workers, log=log)
+                    api_key=api_key or None, model=OPENAI_MODEL,
+                    review_workers=REVIEW_WORKERS, log=log)
             except Exception as e:
                 st.error(f"Pipeline failed: {e}")
                 return
@@ -553,3 +558,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
