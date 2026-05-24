@@ -1,6 +1,4 @@
 """
-student_report_app.py
-=====================
 Complete, self-contained MPR Review System system in ONE file.
 
 Inputs : Main file + Master Data file (.xlsx)
@@ -17,19 +15,7 @@ Pipeline (all in-process, no browser, no external apps):
   8. Merge -> reviewed dataset
   9. Grammar Check: Sensitive Word Flag + Incorrect Student Name Flag (from app.py)
  10. "Student Notes Word Count < 750" flag + final rename
-
-SETUP
-    pip install streamlit pandas openpyxl openai
-RUN
-    streamlit run student_report_app.py
-
-The OpenAI API key (needed only for the AI Review step) is read from Streamlit
-secrets:  st.secrets["openai"]["api_key"]. Create a file .streamlit/secrets.toml:
-
-    [openai]
-    api_key = "sk-..."
-
-(It also falls back to the OPENAI_API_KEY environment variable if present.)
+ 
 """
 
 from __future__ import annotations
