@@ -14,7 +14,7 @@ Pipeline (all in-process, no browser, no external apps):
   7. Report Review: OpenAI gpt-5-mini, 10-rule prompt, parallel (from review.py)
   8. Merge -> reviewed dataset
   9. Grammar Check: Sensitive Word Flag + Incorrect Student Name Flag (from app.py)
- 10. "Student Notes Word Count < 750" flag + final rename
+ 10. "Student Notes Character Count < 750" flag + final rename
 
 SETUP
     pip install streamlit pandas openpyxl openai
@@ -46,7 +46,7 @@ NOTE_COLUMNS = [
 MASTER_STATUS_COL = "Master Academic Status"
 STUDENT_NOTES_COL = "Student notes"
 PATHWAY_COL = "Details of Pathway Alteration"
-WORDCOUNT_FLAG_COL = "Student Notes Word Count < 750"
+CHARCOUNT_FLAG_COL = "Student Notes Character Count < 750"
 REVIEW_STATUS_COL = "Approved / Disapproved / Need Clarification"
 REVIEW_REMARK_COL = "HQ Remark"
 
@@ -401,20 +401,20 @@ def grammar_check(df):
 
 
 # ===========================================================================
-# WORD-COUNT FLAG + FILENAME
+# CHARACTER-COUNT FLAG + FILENAME
 # ===========================================================================
-def word_count(text):
+def char_count(text):
     s = "" if text is None else str(text)
     s = re.sub(r"\s+", " ", s).strip()
-    return 0 if s == "" else s.count(" ") + 1
+    return len(s)
 
 
-def add_wordcount_flag(df, notes_col=STUDENT_NOTES_COL, threshold=750):
+def add_charcount_flag(df, notes_col=STUDENT_NOTES_COL, threshold=750):
     df = df.copy()
     if notes_col not in df.columns:
-        raise KeyError(f"'{notes_col}' column required for word-count flag.")
-    df[WORDCOUNT_FLAG_COL] = df[notes_col].map(
-        lambda v: "Yes" if word_count(v) < threshold else "No")
+        raise KeyError(f"'{notes_col}' column required for character-count flag.")
+    df[CHARCOUNT_FLAG_COL] = df[notes_col].map(
+        lambda v: "Yes" if char_count(v) < threshold else "No")
     return df
 
 
@@ -480,10 +480,10 @@ def run_pipeline(main_df, master_df, *, match_key="Student ADEK Application ID",
 
     notes_col = next((c for c in df.columns if "student notes" in c.lower()),
                      STUDENT_NOTES_COL)
-    df = add_wordcount_flag(df, notes_col=notes_col)
-    flagged = int((df[WORDCOUNT_FLAG_COL] == "Yes").sum())
+    df = add_charcount_flag(df, notes_col=notes_col)
+    flagged = int((df[CHARCOUNT_FLAG_COL] == "Yes").sum())
     fname = final_report_name(len(df), report_date)
-    log(f"Step: word-count flag (flagged<750={flagged})  ->  {fname}")
+    log(f"Step: char-count flag (flagged<750={flagged})  ->  {fname}")
     return df, fname, stats
 
 
