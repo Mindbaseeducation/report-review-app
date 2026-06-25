@@ -309,6 +309,7 @@ If the "Reason why student may not return" ≠ "N/A", then "Notes on student" mu
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
 If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of critical concerns", the Notes must **justify** it
 If "High Priority Flagging" = "Yes", then Notes must **justify** it
+If the "Notes on student" contain any negative statement, allegation, complaint, criticism, or adverse remark about Mindbase, its staff, processes, services, or organization, classify the case as "Need Clarification" to ensure the remark is reviewed for accuracy and context before acceptance
 
 ---
 
