@@ -252,7 +252,6 @@ You must interpret the “Notes on student” to verify the logical correctness 
 - "Academic Concerns" and "Actions Taken on Academic Concerns"
 - "Khotwa Program Status"
 - "Student well-being concerns" and "Actions taken on student well-being concerns"
-- "Type of Transfer"
 - All other key fields
 
 Each rule below is **mandatory**. If any one rule is violated, you must:
@@ -267,11 +266,6 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 - If "Academic Concerns" = "No concerns", then "Actions Taken on Academic Concerns" must be "No action needed"  
 Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
 - If "Academic Concerns" includes "Failed course(s)", then "Actions Taken on Academic Concerns" must include at least one of the following: "AIP", "EIP", or "AAP". "Academic Concerns" and "Actions Taken on Academic Concerns" should be verified in "Notes on student"
-
-🔹 Rule 2: Transfer Logic  
-- If "Type of Transfer" = "Not Applicable" or "N/A", then "Stage of Transfer" **should** be "N/A" 
-- If "Type of Transfer" ≠ "Not Applicable" or "N/A", then "Applications Submitted" **should** be greater than 0
-Vice versa: If "Stage of Transfer" is "N/A" and "Applications Submitted" is "N/A" or 0, then "Type of Transfer" must be "Not Applicable" or "N/A"
 
 🔹 Rule 3: Well-being Consistency  
 - If "Student well-being concerns" = "None", then "Actions taken on student well-being concerns" = "None", and should be verified by "Notes on student" if the "Student well-being concerns" ≠ "None"
@@ -317,7 +311,7 @@ If multiple rules are violated, list all.
 Return the result **strictly** in the following format — do not add any explanation or extra commentary:
 
 Status: [Approved / Need Clarification]  
-Remark: List **all violated rules** together in the format:
+Remark: List *all violated rules* together in the following format:
         Rule A violated: explanation; Rule B violated: explanation; Rule C violated: explanation; Rule D violated: explanation
 
 """
@@ -559,4 +553,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
