@@ -66,7 +66,7 @@ DEFAULT_CLEAN_COLUMNS = [
 ]
 SENSITIVE_WORDS = ["sex", "drugs", "alcohol", "aggression", "aggressive"]
 
-_NA_TOKENS = {"", "-", "na", "n/a", "null", "none", "nan"}
+_NA_TOKENS = {"", "-", "na", "n/a", "n/a.", "null", "none", "nan"}
 
 
 # ===========================================================================
