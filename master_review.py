@@ -6,8 +6,7 @@ Output : One downloadable Excel  ->  "<Date> <N> cases.xlsx"
 
 Pipeline (all in-process, no browser, no external apps):
   1. Master Academic Status lookup (Student ADEK Application ID; not found -> N/A)
-  2. Standardize "Details of Pathway Alteration" (-, NA, n/a, null, blank -> N/A)
-  3. Fill remaining blanks -> N/A
+  2. Fill remaining blanks -> N/A
   4. Build "Student notes" = CONCAT of the 4 note columns
   5. Clean Data: list-like fields  ['a','b'] -> "a, b"   (from updated_excel.py)
   6. Batch split (50 for 100-200, 80 for >200) -- artifact/logging only
@@ -45,7 +44,6 @@ NOTE_COLUMNS = [
 ]
 MASTER_STATUS_COL = "Master Academic Status"
 STUDENT_NOTES_COL = "Student notes"
-PATHWAY_COL = "Details of Pathway Alteration"
 CHARCOUNT_FLAG_COL = "Student Notes Character Count < 750"
 REVIEW_STATUS_COL = "Approved / Disapproved / Need Clarification"
 REVIEW_REMARK_COL = "HQ Remark"
@@ -121,13 +119,6 @@ def add_master_academic_status(main_df, master_df, key_column,
     stats = {"total": len(df), "matched": int(matched.sum()),
              "not_found": int((~matched).sum())}
     return df, stats
-
-
-def standardize_pathway_column(df, col=PATHWAY_COL):
-    df = df.copy()
-    if col in df.columns:
-        df[col] = df[col].map(lambda v: "N/A" if is_na_like(v) else str(v).strip())
-    return df
 
 
 def build_student_notes(df, note_columns=NOTE_COLUMNS):
@@ -219,16 +210,6 @@ Below is a student's monthly report:
 
 📘 Academic:
 - Academic Concerns: {_g(row,'Academic Concerns')}
-- Actions Taken on Academic Concerns: {_g(row,'Actions Taken on Academic Concerns')}
-
-🔁 Transfer:
-- Type of Transfer: {_g(row,'Type of Transfer')}
-- Stage of Transfer: {_g(row,'Stage of Transfer')}
-- Applications Submitted: {_g(row,'No. of transfer applications submitted')}
-
-💡 Well-being:
-- Student well-being concerns: {_g(row,'Student well-being concerns')}
-- Actions taken on student well-being concerns: {_g(row,'Actions taken on student well-being concerns')}
 
 🎯 Address:
 - Accommodation Type: {_g(row,'Accommodation Type')}
@@ -236,10 +217,6 @@ Below is a student's monthly report:
 - Address Line 2: {_g(row,'Address Line 2')}
 - Address City: {_g(row,'Address City')}
 - Address State: {_g(row,'Address State')}
-
-📘 Pathway Alteration:
-- Pathway Alteration: {_g(row,'Pathway Alteration')}
-- Details of Pathway Alteration: {_g(row,'Details of Pathway Alteration')}
 
 📝 Notes on student:
 {_g(row,'Student notes')}
@@ -249,9 +226,8 @@ Below is a student's monthly report:
 🔍 PRIMARY REVIEW OBJECTIVE:
 
 You must interpret the “Notes on student” to verify the logical correctness of:
-- "Academic Concerns" and "Actions Taken on Academic Concerns"
+- "Academic Concerns"
 - "Khotwa Program Status"
-- "Student well-being concerns" and "Actions taken on student well-being concerns"
 - All other key fields
 
 Each rule below is **mandatory**. If any one rule is violated, you must:
@@ -262,46 +238,25 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 
 📜 LOGICAL RULES TO VALIDATE (ALL ARE EQUALLY IMPORTANT):
 
-🔹 Rule 1: Academic Concerns ↔ Actions Taken  
-- If "Academic Concerns" = "No concerns", then "Actions Taken on Academic Concerns" must be "No action needed"  
-Vice versa: If "Actions Taken" = "No action needed", then "Academic Concerns" must be "No concerns"
-- If "Academic Concerns" includes "Failed course(s)", then "Actions Taken on Academic Concerns" must include at least one of the following: "AIP", "EIP", or "AAP". "Academic Concerns" and "Actions Taken on Academic Concerns" should be verified in "Notes on student"
+🔹 Rule 1: Academic Concerns
+- If "Academic Concerns" ≠ "No concerns", then Notes must **justify** it
+Vice versa: If the "Notes on student" contain any academic concerns, then "Academic Concerns" should not be "No concerns"
 
-🔹 Rule 3: Well-being Consistency  
-- If "Student well-being concerns" = "None", then "Actions taken on student well-being concerns" = "None", and should be verified by "Notes on student" if the "Student well-being concerns" ≠ "None"
-Vice versa: If actions = "None", concerns must also be "None"
+🔹 Rule 2: Address Check  
+- If "Accommodation Type" is "Homestay" or "College Dormitory / Student Residential Community" or "Private Accommodation" or "Temporary Accommodation - Friends / Family" or "Temporary Accommodation - Hotel / Airbnb", then none of "Address Line 1", "Address Line 2", "Address City", or "Address State" should be "N/A"
 
-🔹 Rule 4: Address Check  
-- If "Khotwa Program Status" = "Scholarship Active - Currently taking classes", then "Accommodation Type" must not be "Student in Transition - Address will be updated soon" or "Student under withdrawal - Termination (Address not available)"
-Vice Versa: If "Accommodation Type" is "Student in Transition - Address will be updated soon" or "Student under withdrawal - Termination (Address not available)", then "Khotwa Program Status" must not be "Scholarship Active - Currently taking classes"
-- If "Accommodation Type" is not "Student in Transition - Address will be updated soon" or "Student under withdrawal - Termination (Address not available)", then the combined values of "Address Line 1", "Address Line 2", "Address City", and "Address State" should form a complete, meaningful, and logically valid address
-
-🔹 Rule 5: Khotwa Status  
-If "Khotwa Program Status" = "Scholarship Active - Not currently taking classes but planning to return" or "Scholarship Active - May not return" or "Scholarship Active - New Student not taking classes yet"
-→ Then Notes must **justify** it
-If "Khotwa Program Status" = "Scholarship Active - New Student not taking classes yet", then "Type of Transfer" **should** be "Not Applicable"
-
-🔹 Rule 6: Pathway Alteration Check
-- If "Pathway Alteration" ≠ "No", then "Details of Pathway Alteration" ≠ "N/A"
-Vice Versa: If "Details of Pathway Alteration" ≠ "N/A", then "Pathway Alteration" ≠ "No"
-
-🔹 Rule 7: Date of meeting with student Check
+🔹 Rule 3: Date of meeting with student Check
 - If "Flag for 1:1 mentoring session" = "No" and "Reason for student not taking classes" = "N/A" and "Reason why student may not return" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
 Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason for student not taking classes" = "N/A" and "Reason why student may not return" = "N/A", then "Flag for 1:1 mentoring session" = "No"
 - If "Flag for 1:1 mentoring session" = "Yes", then "Date of meeting with student" must not be a future date (i.e., should be less than or equal to the current date)
 Vice Versa: If "Date of meeting with student" is a future date (greater than the current date), then "Flag for 1:1 mentoring session" must be "No"
 
-🔹 Rule 8: Academic Hierarchy Check
+🔹 Rule 4: Academic Hierarchy Check
 Ensure that academic status progression follows this strict hierarchy: "English Program Courses Only" or "Foundation Courses" → "Hybrid / Bridge" → "Associate Degree Courses Only" or "Diploma" → "Bachelor Degree Courses Only"
 The transition from "Master Academic Status" to "Current Academic Status" must always move forward or remain at the same level within this hierarchy
 
-🔹 Rule 9: Reason for Absence Check
-If the "Reason for student not taking classes" ≠ "N/A", then "Notes on student" must include sufficient details and context explaining that reason
-If the "Reason why student may not return" ≠ "N/A", then "Notes on student" must include sufficient details, context explaining that reason, and Stop Salary Status
-
-🔹 Rule 10: Additional Notes-Based Validations  
+🔹 Rule 5: Additional Notes-Based Validations  
 If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
-If "Actions taken on student well-being concerns" = "Informed ADEK Advisor of critical concerns", the Notes must **justify** it
 If "High Priority Flagging" = "Yes", then Notes must **justify** it
 If the "Notes on student" contain any negative statement, allegation, complaint, criticism, or adverse remark about Mindbase, its staff, processes, services, or organization, classify the case as "Need Clarification" to ensure the remark is reviewed for accuracy and context before acceptance
 
@@ -444,7 +399,6 @@ def run_pipeline(main_df, master_df, *, match_key="Student ADEK Application ID",
     log("Stage 1: master status + pathway clean + blanks->N/A + student notes")
     df, stats = add_master_academic_status(main_df, master_df, match_key)
     log(f"  matched={stats['matched']}  not_found(N/A)={stats['not_found']}  total={stats['total']}")
-    df = standardize_pathway_column(df)
     df, missing = build_student_notes(df)
     if missing:
         log(f"  note columns missing (skipped): {missing}")
