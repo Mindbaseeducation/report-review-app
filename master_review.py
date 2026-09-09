@@ -210,6 +210,8 @@ Below is a student's monthly report:
 
 📘 Academic:
 - Academic Concerns: {_g(row,'Academic Concerns')}
+- Is Student engaged with Improvement plan: {_g(row,'Is Student engaged with Improvement plan')}
+- Update on current grades: {_g(row,'Update on current grades')}
 
 🎯 Address:
 - Accommodation Type: {_g(row,'Accommodation Type')}
@@ -228,6 +230,7 @@ Below is a student's monthly report:
 You must interpret the “Notes on student” to verify the logical correctness of:
 - "Academic Concerns"
 - "Khotwa Program Status"
+- "Update on current grades"
 - All other key fields
 
 Each rule below is **mandatory**. If any one rule is violated, you must:
@@ -239,25 +242,24 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 📜 LOGICAL RULES TO VALIDATE (ALL ARE EQUALLY IMPORTANT):
 
 🔹 Rule 1: Academic Concerns
-- If "Academic Concerns" ≠ "No concerns", then Notes must **justify** it
+- If "Academic Concerns" ≠ "No concerns", then Notes must **justify** academic concern(s) and **describe** the action(s) taken to address the concern(s)
 Vice versa: If the "Notes on student" contain any academic concerns, then "Academic Concerns" should not be "No concerns"
 
 🔹 Rule 2: Address Check  
-- If "Accommodation Type" is "Homestay" or "College Dormitory / Student Residential Community" or "Private Accommodation" or "Temporary Accommodation - Friends / Family" or "Temporary Accommodation - Hotel / Airbnb", then none of "Address Line 1", "Address Line 2", "Address City", or "Address State" should be "N/A"
+If "Accommodation Type" is "Homestay" or "College Dormitory / Student Residential Community" or "Private Accommodation" or "Temporary Accommodation - Friends / Family" or "Temporary Accommodation - Hotel / Airbnb", then none of "Address Line 1", "Address Line 2", "Address City", or "Address State" should be "N/A"
 
 🔹 Rule 3: Date of meeting with student Check
-- If "Flag for 1:1 mentoring session" = "No" and "Reason for student not taking classes" = "N/A" and "Reason why student may not return" = "N/A", then "Academic Concerns" should contain "Missed mandatory mentor 1:1 session"
-Vice Versa: If "Academic Concerns" contains "Missed mandatory mentor 1:1 session" and "Reason for student not taking classes" = "N/A" and "Reason why student may not return" = "N/A", then "Flag for 1:1 mentoring session" = "No"
-- If "Flag for 1:1 mentoring session" = "Yes", then "Date of meeting with student" must not be a future date (i.e., should be less than or equal to the current date)
-Vice Versa: If "Date of meeting with student" is a future date (greater than the current date), then "Flag for 1:1 mentoring session" must be "No"
+If "Flag for 1:1 mentoring session" = "Yes", then "Date of meeting with student" must:
+- Not be a future date; and
+- Not be earlier than the 25th of the previous month relative to the current date
 
 🔹 Rule 4: Academic Hierarchy Check
 Ensure that academic status progression follows this strict hierarchy: "English Program Courses Only" or "Foundation Courses" → "Hybrid / Bridge" → "Associate Degree Courses Only" or "Diploma" → "Bachelor Degree Courses Only"
 The transition from "Master Academic Status" to "Current Academic Status" must always move forward or remain at the same level within this hierarchy
 
 🔹 Rule 5: Additional Notes-Based Validations  
-If "Academic Concerns" = "Behavioral issues impacting academics", the Notes must **justify** it
-If "High Priority Flagging" = "Yes", then Notes must **justify** it
+If "Is Student engaged with Improvement plan" = "No", then "Notes on student" must **justify** why the student is not engaged with the improvement plan and include a description of the action taken to address the situation
+If "Update on current grades" is "At risk of falling below 2.5CGPA / 55% WAM", "Not on track to pass English level", or "Tracking below 2.5CGPA / 55% WAM", then "Notes on student" must **justify** the selected update and include a description of the action taken to address the situation
 If the "Notes on student" contain any negative statement, allegation, complaint, criticism, or adverse remark about Mindbase, its staff, processes, services, or organization, classify the case as "Need Clarification" to ensure the remark is reviewed for accuracy and context before acceptance
 
 ---
