@@ -246,7 +246,9 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 Vice versa: If the "Notes on student" contain any academic concerns, then "Academic Concerns" should not be "No concerns"
 
 🔹 Rule 2: Address Check  
-If "Accommodation Type" is "Homestay" or "College Dormitory / Student Residential Community" or "Private Accommodation" or "Temporary Accommodation - Friends / Family" or "Temporary Accommodation - Hotel / Airbnb", then none of "Address Line 1", "Address Line 2", "Address City", or "Address State" should be "N/A"
+- If "Accommodation Type" is "Homestay" or "College Dormitory / Student Residential Community" or "Private Accommodation" or "Temporary Accommodation - Friends / Family" or "Temporary Accommodation - Hotel / Airbnb", then none of "Address Line 1", "Address Line 2", "Address City", or "Address State" should be "N/A"
+- If "Khotwa Program Status" = "Scholarship Active - Currently taking classes", then "Accommodation Type" must not be Student in pathway transition nor Student under withdrawal
+Vice Versa: If "Accommodation Type" is Student in pathway transition or Student under withdrawal, then "Khotwa Program Status" must not be "Scholarship Active - Currently taking classes"
 
 🔹 Rule 3: Date of meeting with student Check
 If "Flag for 1:1 mentoring session" = "Yes", then "Date of meeting with student" must:
