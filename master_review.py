@@ -260,9 +260,9 @@ Ensure that academic status progression follows this strict hierarchy: "English 
 The transition from "Master Academic Status" to "Current Academic Status" must always move forward or remain at the same level within this hierarchy
 
 🔹 Rule 5: Additional Notes-Based Validations  
-If "Is Student engaged with Improvement plan" = "No", then "Notes on student" must **justify** why the student is not engaged with the improvement plan and include a description of the action taken to address the situation
-If "Update on current grades" is "At risk of falling below 2.5CGPA / 55% WAM", "Not on track to pass English level", or "Tracking below 2.5CGPA / 55% WAM", then "Notes on student" must **justify** the selected update and include a description of the action taken to address the situation
-If the "Notes on student" contain any negative statement, allegation, complaint, criticism, or adverse remark about Mindbase, its staff, processes, services, or organization, classify the case as "Need Clarification" to ensure the remark is reviewed for accuracy and context before acceptance
+- If "Is Student engaged with Improvement plan" = "No", then "Notes on student" must **justify** why the student is not engaged with the improvement plan and include a description of the action taken to address the situation
+- If "Update on current grades" is "At risk of falling below 2.5CGPA / 55% WAM", "Not on track to pass English level", or "Tracking below 2.5CGPA / 55% WAM", then "Notes on student" must **justify** the selected update and include a description of the action taken to address the situation
+- If the "Notes on student" contain any negative statement, allegation, complaint, criticism, or adverse remark about Mindbase, its staff, processes, services, or organization, classify the case as "Need Clarification" to ensure the remark is reviewed for accuracy and context before acceptance
 
 ---
 
