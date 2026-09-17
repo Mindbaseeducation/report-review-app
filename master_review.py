@@ -242,8 +242,8 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 📜 LOGICAL RULES TO VALIDATE (ALL ARE EQUALLY IMPORTANT):
 
 🔹 Rule 1: Academic Concerns
-- If "Academic Concerns" ≠ "No concerns", then Notes must **justify** academic concern(s) and **describe** the action(s) taken to address the concern(s)
-Vice versa: If the "Notes on student" contain any academic concerns, then "Academic Concerns" should not be "No concerns"
+- If "Academic Concerns" ≠ "No concerns" or "N/A", then Notes must **justify** academic concern(s) and **describe** the action(s) taken to address the concern(s)
+Vice versa: If the "Notes on student" contain any academic concerns, then "Academic Concerns" should not be "No concerns" nor "N/A"
 
 🔹 Rule 2: Address Check  
 - If "Accommodation Type" is "Homestay" or "College Dormitory / Student Residential Community" or "Private Accommodation" or "Temporary Accommodation - Friends / Family" or "Temporary Accommodation - Hotel / Airbnb", then none of "Address Line 1", "Address Line 2", "Address City", or "Address State" should be "N/A"
