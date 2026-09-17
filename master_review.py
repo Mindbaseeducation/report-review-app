@@ -5,7 +5,7 @@ Inputs : Main file + Master Data file (.xlsx)
 Output : One downloadable Excel  ->  "<Date> <N> cases.xlsx"
 
 Pipeline (all in-process, no browser, no external apps):
-  1. Master Academic Status lookup (Student ADEK Application ID; not found -> N/A)
+  1. Master Academic Status lookup (Student ADEK Applicant ID; not found -> N/A)
   2. Fill remaining blanks -> N/A
   4. Build "Student notes" = CONCAT of the 4 note columns
   5. Clean Data: list-like fields  ['a','b'] -> "a, b"   (from updated_excel.py)
@@ -395,7 +395,7 @@ def df_to_xlsx_bytes(df):
 # ===========================================================================
 # PIPELINE
 # ===========================================================================
-def run_pipeline(main_df, master_df, *, match_key="Student ADEK Application ID", report_date=None,
+def run_pipeline(main_df, master_df, *, match_key="Student ADEK Applicant ID", report_date=None,
                  api_key=None, model=OPENAI_MODEL, review_workers=REVIEW_WORKERS,
                  clean_columns=None, log=print):
     report_date = report_date or dt.date.today()
@@ -455,7 +455,7 @@ def main():
 
     with st.sidebar:
         st.header("Settings")
-        match_key = st.text_input("Match key column", value="Student ADEK Application ID")
+        match_key = st.text_input("Match key column", value="Student ADEK Applicant ID")
         report_date = st.date_input("Report date", value=dt.date.today())
 
     # OpenAI key comes from Streamlit secrets:
