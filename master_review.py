@@ -54,13 +54,10 @@ REVIEW_WORKERS = 16
 
 DEFAULT_CLEAN_COLUMNS = [
     "Academic Concerns",
-    "Actions Taken on Academic Concerns",
-    "Location of Transfer",
-    "Pathway Alteration",
-    "Student well-being concerns",
-    "Actions taken on student well-being concerns",
-    "Details of extracurricular activities",
     "Student recognition",
+    "Institution ECAs",
+    "Non-Institution ECAs",
+    "Location of Transfer"
 ]
 SENSITIVE_WORDS = ["sex", "drugs", "alcohol", "aggression", "aggressive"]
 
