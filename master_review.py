@@ -6,7 +6,9 @@ Output : One downloadable Excel  ->  "<Date> <N> cases.xlsx"
 
 Pipeline (all in-process, no browser, no external apps):
   1. Master Academic Status lookup (Student ADEK Applicant ID; not found -> N/A)
-  2. Fill remaining blanks -> N/A
+  2. Abroad Mobile Number: restore numbers Excel turned into formulas
+     (=1-617-212-1357 -> +1-617-212-1357), add missing "+", junk -> N/A
+  3. Fill remaining blanks -> N/A
   4. Build "Student notes" = CONCAT of the 4 note columns
   5. Clean Data: list-like fields  ['a','b'] -> "a, b"   (from updated_excel.py)
   6. Batch split (50 for 100-200, 80 for >200) -- artifact/logging only
@@ -32,6 +34,7 @@ import re
 import openai
 import pandas as pd
 import streamlit as st
+from openpyxl import load_workbook
 
 # ===========================================================================
 # CONSTANTS
@@ -45,6 +48,7 @@ NOTE_COLUMNS = [
 MASTER_STATUS_COL = "Master Academic Status"
 STUDENT_NOTES_COL = "Student notes"
 CHARCOUNT_FLAG_COL = "Student Notes Character Count < 750"
+ABROAD_MOBILE_COL = "Abroad Mobile Number"
 REVIEW_STATUS_COL = "Approved / Disapproved / Need Clarification"
 REVIEW_REMARK_COL = "HQ Remark"
 
@@ -115,6 +119,115 @@ def add_master_academic_status(main_df, master_df, key_column,
     df[MASTER_STATUS_COL] = status.values
     stats = {"total": len(df), "matched": int(matched.sum()),
              "not_found": int((~matched).sum())}
+    return df, stats
+
+
+# ===========================================================================
+# ABROAD MOBILE NUMBER -- recover formula-mangled numbers + standardize
+# ===========================================================================
+# Power Automate writes "+1-617-212-1357" into SharePoint Excel, Excel turns
+# the "+" into "=" and stores the formula "=1-617-212-1357", whose computed
+# value (-2185) is what pandas reads. openpyxl with data_only=False returns
+# the formula text itself, so the original digits can be recovered.
+
+def _raw_to_str(v) -> str:
+    if v is None:
+        return ""
+    if isinstance(v, bool):
+        return str(v)
+    if isinstance(v, int):
+        return str(v)
+    if isinstance(v, float):
+        if pd.isna(v):
+            return ""
+        return str(int(v)) if v.is_integer() else str(v)
+    return str(getattr(v, "text", v))  # ArrayFormula -> its formula text
+
+
+def read_raw_column(file, column):
+    """Return the raw cell contents (formula text, not computed values) of
+    `column` on the first sheet, one entry per data row. None if unavailable."""
+    try:
+        if hasattr(file, "seek"):
+            file.seek(0)
+        wb = load_workbook(file, read_only=True, data_only=False)
+        ws = wb.worksheets[0]
+        rows = ws.iter_rows(values_only=True)
+        header = next(rows, None)
+        if not header:
+            wb.close()
+            return None
+        names = [_norm(h) for h in header]
+        if column not in names:
+            wb.close()
+            return None
+        idx = names.index(column)
+        values, empty = [], []
+        for r in rows:
+            values.append(r[idx] if idx < len(r) else None)
+            empty.append(all(c is None or _norm(c) == "" for c in r))
+        wb.close()
+        while empty and empty[-1]:  # pandas drops trailing empty rows too
+            empty.pop()
+            values.pop()
+        return [_raw_to_str(v) for v in values]
+    except Exception:
+        return None
+    finally:
+        if hasattr(file, "seek"):
+            file.seek(0)
+
+
+def restore_raw_column(file, df, column=ABROAD_MOBILE_COL, log=print):
+    """Replace `column` in df with the raw cell text from the uploaded file."""
+    if column not in df.columns:
+        return df
+    raw = read_raw_column(file, column)
+    if raw is None or len(raw) != len(df):
+        log(f"  warning: could not read raw '{column}' cells; using computed values")
+        return df
+    df = df.copy()
+    df[column] = raw
+    return df
+
+
+_PHONE_NA_WORDS = {"not applicable", "not available", "nil", "no", "no number",
+                   "none", "na.", "n.a", "n.a.", "not provided", "unknown", "0"}
+
+
+def standardize_phone(value) -> str:
+    """'=1-617-212-1357' / '-1-617-...' / '1-617-...' -> '+1-617-...'.
+    Blank, NA-like, text, or too-short/too-long values -> 'N/A'."""
+    s = _norm(value).lstrip("'").strip()
+    if is_na_like(s) or s.lower() in _PHONE_NA_WORDS:
+        return "N/A"
+    body = s.lstrip("+=-").strip()           # '=' / '-' / '+' all mean '+'
+    body = body.lstrip("+=-").strip()        # handles '+ =1...', '= +1...'
+    if re.fullmatch(r"\d+\.0", body):        # numeric cell read as '16172121357.0'
+        body = body[:-2]
+    if body.startswith("00"):                # international prefix 00 == +
+        body = body[2:].lstrip()
+    if not re.fullmatch(r"[\d\s\-().]+", body):
+        return "N/A"                          # contains letters / other junk
+    digits = re.sub(r"\D", "", body)
+    if not 7 <= len(digits) <= 15:            # e.g. -2185 (already computed) -> junk
+        return "N/A"
+    if digits.startswith("0"):                # local format; country code unknown
+        return body
+    return "+" + body
+
+
+def standardize_abroad_mobile(df, column=ABROAD_MOBILE_COL):
+    if column not in df.columns:
+        return df, None
+    df = df.copy()
+    before = df[column].map(_norm)
+    df[column] = before.map(standardize_phone)
+    stats = {
+        "restored_from_formula": int(before.str.startswith("=").sum()),
+        "set_to_na": int((df[column] == "N/A").sum()),
+        "total": len(df),
+    }
     return df, stats
 
 
@@ -400,6 +513,10 @@ def run_pipeline(main_df, master_df, *, match_key="Student ADEK Applicant ID", r
     log("Stage 1: master status + pathway clean + blanks->N/A + student notes")
     df, stats = add_master_academic_status(main_df, master_df, match_key)
     log(f"  matched={stats['matched']}  not_found(N/A)={stats['not_found']}  total={stats['total']}")
+    df, phone_stats = standardize_abroad_mobile(df)
+    if phone_stats:
+        log(f"  Abroad Mobile Number: restored_from_formula={phone_stats['restored_from_formula']}  "
+            f"set_to_N/A={phone_stats['set_to_na']}")
     df, missing = build_student_notes(df)
     if missing:
         log(f"  note columns missing (skipped): {missing}")
@@ -483,6 +600,9 @@ def main():
         logs = []
         def log(msg):
             logs.append(str(msg)); log_box.code("\n".join(logs))
+
+        # Recover Abroad Mobile Numbers that Excel stored as formulas.
+        main_df = restore_raw_column(main_file, main_df, ABROAD_MOBILE_COL, log=log)
 
         with st.status("Running pipeline…", expanded=True):
             try:
