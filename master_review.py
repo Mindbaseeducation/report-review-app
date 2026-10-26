@@ -317,6 +317,8 @@ Below is a student's monthly report:
 - Flag for 1:1 mentoring session: {_g(row,'Did Mentoring Session take place?')}
 - Date of meeting with student: {_g(row,'Date of meeting with student')}
 - High Priority Flagging: {_g(row,'High Priority Flagging')}
+- UAE Mobile Number: {_g(row,'UAE Mobile Number')}
+- Abroad Mobile Number: {_g(row,'Abroad Mobile Number')}
 
 📘 Academic:
 - Academic Concerns: {_g(row,'Academic Concerns')}
@@ -352,8 +354,30 @@ Each rule below is **mandatory**. If any one rule is violated, you must:
 📜 LOGICAL RULES TO VALIDATE (ALL ARE EQUALLY IMPORTANT):
 
 🔹 Rule 1: Academic Concerns
-- If "Academic Concerns" ≠ "No concerns" or "N/A", then Notes must **justify** academic concern(s) and **describe** the action(s) taken to address the concern(s)
-Vice versa: If the "Notes on student" contain any academic concerns, then "Academic Concerns" should not be "No concerns" nor "N/A"
+The valid "Academic Concerns" values are:
+- Student "At Risk" Below 2.5CGPA / 55%
+- Difficulty understanding course content
+- Health issues affecting academic performance
+- Poor class attendance (in-person or online)
+- Consistent borderline grades
+- Missed assignment or coursework deadlines
+- Enrolling in courses not counting toward degree
+- Withdrew /dropped class without ADEK approval
+- Failing course(s)
+- Academic warning / probation from institution
+- Misusing Pass / Fail options to protect GPA
+- Immigration / visa issues impacting academic standing / progress
+- Missed university application deadline due to student inaction
+- Missed university application deadline due to ADEK approval
+- Missed deadline for transfer due to student inaction
+- Tested out of ESL but English proficiency is poor
+- Academic Integrity Violation
+- Financial Hold impacting enrolment
+
+- If "Academic Concerns" contains any of the values above, then for EACH selected concern, "Notes on student" must **justify** the concern and **describe** the action taken to address it
+Vice versa: If "Notes on student" clearly describe a situation that matches one of the concerns listed above, then that matching concern must be present in "Academic Concerns"
+- Be lenient: minor, routine or one-off academic remarks (e.g. finding a topic slightly challenging, a single low quiz score, busy exam period, general study tips discussed) are NOT academic concerns and must NOT trigger this rule. Only flag when the notes clearly describe an ongoing issue that matches a concern from the list above
+- If "Academic Concerns" is "No concerns" or "N/A" and the notes only mention minor issues, this rule is NOT violated
 
 🔹 Rule 2: Address Check  
 - If "Accommodation Type" is "Homestay" or "College Dormitory / Student Residential Community" or "Private Accommodation" or "Temporary Accommodation - Friends / Family" or "Temporary Accommodation - Hotel / Airbnb", then none of "Address Line 1", "Address Line 2", "Address City", or "Address State" should be "N/A"
@@ -373,6 +397,10 @@ The transition from "Master Academic Status" to "Current Academic Status" must a
 - If "Is Student engaged with Improvement plan" = "No", then "Notes on student" must **justify** why the student is not engaged with the improvement plan and include a description of the action taken to address the situation
 - If "Update on current grades" is "At risk of falling below 2.5CGPA / 55% WAM", "Not on track to pass English level", or "Tracking below 2.5CGPA / 55% WAM", then "Notes on student" must **justify** the selected update and include a description of the action taken to address the situation
 - If the "Notes on student" contain any negative statement, allegation, complaint, criticism, or adverse remark about Mindbase, its staff, processes, services, or organization, classify the case as "Need Clarification" to ensure the remark is reviewed for accuracy and context before acceptance
+
+🔹 Rule 6: Abroad Mobile Number Check
+- If "Khotwa Program Status" = "Scholarship Active - Currently taking classes", then "Abroad Mobile Number" must NOT start with "+971" (a UAE number cannot be the abroad number of a student currently studying abroad)
+- "Abroad Mobile Number" = "N/A" does not violate this rule
 
 ---
 
