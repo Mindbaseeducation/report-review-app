@@ -1,2 +1,2 @@
 # report-review-app
-MTR Review
+MPR AI Review
