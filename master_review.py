@@ -325,6 +325,10 @@ Below is a student's monthly report:
 - Is Student engaged with Improvement plan: {_g(row,'Is Student engaged with Improvement plan')}
 - Update on current grades: {_g(row,'Update on current grades')}
 
+🗣️ Student Interaction:
+- Notes Submission Feasibility: {_g(row,'Notes Submission Feasibility')}
+- Student Engagement Outreach Details: {_g(row,'Student Engagement Outreach Details')}
+
 🎯 Address:
 - Accommodation Type: {_g(row,'Accommodation Type')}
 - Address Line 1: {_g(row,'Address Line 1')}
@@ -333,7 +337,7 @@ Below is a student's monthly report:
 - Address State: {_g(row,'Address State')}
 
 📝 Notes on student:
-{_g(row,'Student notes')}
+{_norm(_g(row,'Student notes')) or 'N/A'}
 
 ---
 
@@ -401,6 +405,13 @@ The transition from "Master Academic Status" to "Current Academic Status" must a
 🔹 Rule 6: Abroad Mobile Number Check
 - If "Khotwa Program Status" = "Scholarship Active - Currently taking classes", then "Abroad Mobile Number" must NOT start with "+971" (a UAE number cannot be the abroad number of a student currently studying abroad)
 - "Abroad Mobile Number" = "N/A" does not violate this rule
+
+🔹 Rule 7: Student Interaction Check
+- If "Notes Submission Feasibility" = "No", then BOTH of the following must hold:
+  (a) "Notes on student" must be "N/A"; and
+  (b) "Student Engagement Outreach Details" must NOT be "N/A" and must clearly state the reason why notes could not be submitted
+- If "Notes Submission Feasibility" = "Yes", then "Notes on student" must NOT be "N/A"
+- "Notes Submission Feasibility" = "N/A" does not violate this rule
 
 ---
 
