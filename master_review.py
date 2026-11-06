@@ -407,11 +407,12 @@ The transition from "Master Academic Status" to "Current Academic Status" must a
 - "Abroad Mobile Number" = "N/A" does not violate this rule
 
 🔹 Rule 7: Student Interaction Check
-- If "Notes Submission Feasibility" = "No", then BOTH of the following must hold:
+- If "Notes Submission Feasibility" = "No - please describe outreach attempts in next question", then BOTH of the following must hold:
   (a) "Notes on student" must be "N/A"; and
-  (b) "Student Engagement Outreach Details" must NOT be "N/A" and must clearly state the reason why notes could not be submitted
+  (b) "Student Engagement Outreach Details" must NOT be "N/A" and must describe the outreach attempts made and the reason why notes could not be submitted
 - If "Notes Submission Feasibility" = "Yes", then "Notes on student" must NOT be "N/A"
 - "Notes Submission Feasibility" = "N/A" does not violate this rule
+- If "Notes Submission Feasibility" = "No - please describe outreach attempts in next question", do not apply the notes-justification requirements of Rule 1 and Rule 5
 
 ---
 
